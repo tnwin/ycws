@@ -1,0 +1,152 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Random Background Colour</title>
+    <!-- Bootstrap Styling -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      /* CSS */
+      body {
+        overflow: hidden; /* Hides scroll bar */
+      }
+
+      /* Centres the .container class to middle of the screen */
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      /* Random colour background and name */
+      .colour {
+        background: rgba(146, 170, 184, 0.6);
+        border: 4px solid black; /* Thick solid black border */
+        border-radius: 10px; /* Rounds corner of border */
+        padding: 40px; /* Gives space between text and border */
+        width: 400px; /* Fixes box width */
+        text-align: center;
+      }
+
+      /* Collection of two buttons */
+      .buttons {
+        border: 1px dashed black;
+        border-radius: 10px;
+      }
+
+      /* Each individual button */
+      .btn {
+        margin: 16px; /* Space on  outside of button */
+      }
+
+      /* Animate button when hovering .btn */
+      .btn:hover {
+        transition: 0.3s ease all;
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML -->
+
+    <!-- Home button block -->
+    <div>
+      <a href="../index.html">🔙 Home</a>
+      <a href="./colour-clean.html">Cleaner Version</a>
+    </div>
+
+    <!-- Centred container -->
+    <div class="container">
+      <!-- Colour name selected via .container -->
+      <h2 class="colour">Random Background Colour</h2>
+
+      <!-- Collection of buttons -->
+      <div class="buttons">
+        <button class="my-colours btn btn-primary">My Colours</button>
+        <button class="random btn btn-warning">Random Colour</button>
+      </div>
+    </div>
+
+    <script>
+      // JavaScript
+
+      // List of colours
+      let colours = [
+        "hotpink",
+        "black",
+        "rgb(255,255,255)",
+        "rgb(0,0,0)",
+        "rgba(123,213,6,0.5)",
+        "#F15025",
+        "#FF751F",
+        "hsl(323, 100%, 81%)"
+      ];
+
+      // List of all possible hexidecimal digits
+      let hexDigits = [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ];
+
+      // DOM Selectors
+      let body = document.querySelector("body");
+      let colourName = document.querySelector(".colour");
+      let myColoursBtn = document.querySelector(".my-colours");
+      let randomColourBtn = document.querySelector(".random");
+
+      // When "My Colours" button is clicked
+      myColoursBtn.addEventListener("click", function () {
+        // Set selectedColour to be a random colour from colours[]
+        let selectedColour =
+          colours[Math.floor(Math.random() * colours.length)];
+
+        // Set the background colour and the text to be the selectedColour
+        body.style.background = selectedColour;
+        colourName.textContent = selectedColour;
+      });
+
+      // When "Random Colour" button is clicked
+      randomColourBtn.addEventListener("click", function () {
+        // Start the hexColour with "#"
+        let hexColour = "#";
+        // Add on 6 random hex digits from hexDigits
+        for (let i = 0; i < 6; i++) {
+          hexColour =
+            hexColour + hexDigits[Math.floor(Math.random() * hexDigits.length)];
+        }
+
+        // Set the background colour and the text to be the random hexColour
+        body.style.background = hexColour;
+        colourName.textContent = hexColour;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Counter & Reflex</title>
+    <!-- Bootstrap styling -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        height: 100%;
+        background: rgb(63, 206, 251);
+        background: -moz-radial-gradient(
+          circle,
+          rgba(63, 206, 251, 1) 0%,
+          rgba(252, 222, 70, 1) 100%
+        );
+        background: -webkit-radial-gradient(
+          circle,
+          rgba(63, 206, 251, 1) 0%,
+          rgba(252, 222, 70, 1) 100%
+        );
+        background: radial-gradient(
+          circle,
+          rgba(63, 206, 251, 1) 0%,
+          rgba(252, 222, 70, 1) 100%
+        );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3fcefb",endColorstr="#fcde46",GradientType=1);
+      }
+
+      .counters,
+      .scores {
+        display: flex;
+        justify-content: center;
+      }
+
+      .counter,
+      .score {
+        margin: 1rem;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .reaction {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin: 5rem;
+      }
+
+      .btn-reflex {
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <a href="../index.html">🔙 Home</a>
+    </div>
+    <div class="container">
+      <h1>Reaction Timer</h1>
+      <div class="counters">
+        <div class="counter">
+          <h2>Minimum Time</h2>
+          <h3 class="min-counter"></h3>
+          <button class="btn btn-danger min-dec">Decrement</button>
+          <button class="btn btn-secondary min-reset">Reset</button>
+          <button class="btn btn-success min-inc">Increment</button>
+        </div>
+
+        <button class="btn btn-outline-primary btn-start">~ Start ~</button>
+
+        <div class="counter">
+          <h2>Maximum Time</h2>
+          <h3 class="max-counter"></h3>
+          <button class="btn btn-danger max-dec">Decrement</button>
+          <button class="btn btn-secondary max-reset">Reset</button>
+          <button class="btn btn-success max-inc">Increment</button>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="reaction">
+      <button class="btn btn-warning btn-reflex"></button>
+    </div>
+
+    <hr />
+
+    <div class="scores">
+      <div class="score">
+        <h2 class="card-title">Your Score</h2>
+        <h3 class="curr-score card-body"></h3>
+      </div>
+
+      <div class="score">
+        <h2 class="card-title">High Score</h2>
+        <h3 class="high-score card-body"></h3>
+      </div>
+    </div>
+
+    <script>
+      let minValue = 0;
+      let maxValue = 0;
+
+      let minCounter = document.querySelector(".min-counter");
+      minCounter.textContent = minValue;
+
+      let maxCounter = document.querySelector(".max-counter");
+      maxCounter.textContent = maxValue;
+
+      let minDecrement = document.querySelector(".min-dec");
+      let minReset = document.querySelector(".min-reset");
+      let minIncrement = document.querySelector(".min-inc");
+
+      let maxDecrement = document.querySelector(".max-dec");
+      let maxReset = document.querySelector(".max-reset");
+      let maxIncrement = document.querySelector(".max-inc");
+
+      let start = document.querySelector(".btn-start");
+
+      let reflex = document.querySelector(".btn-reflex");
+      reflex.disabled = true;
+      reflex.textContent = "Set the timer and click start!";
+
+      let isGameRunning = false;
+
+      let currentScore = document.querySelector(".curr-score");
+      currentScore.textContent = "N/A";
+      let highScore = document.querySelector(".high-score");
+      highScore.textContent = "N/A";
+
+      minDecrement.addEventListener("click", function () {
+        minValue = minValue - 1;
+        minCounter.textContent = minValue;
+      });
+
+      minReset.addEventListener("click", function () {
+        minValue = 0;
+        minCounter.textContent = minValue;
+      });
+
+      minIncrement.addEventListener("click", function () {
+        minValue = minValue + 1;
+        minCounter.textContent = minValue;
+      });
+
+      maxDecrement.addEventListener("click", function () {
+        maxValue = maxValue - 1;
+        maxCounter.textContent = maxValue;
+      });
+
+      maxReset.addEventListener("click", function () {
+        maxValue = 0;
+        maxCounter.textContent = maxValue;
+      });
+
+      maxIncrement.addEventListener("click", function () {
+        maxValue = maxValue + 1;
+        maxCounter.textContent = maxValue;
+      });
+
+      start.addEventListener("click", function () {
+        if (isGameRunning === false) {
+          startGame();
+        }
+      });
+
+      function startGame() {
+        if (minValue < 0 || minValue >= maxValue) {
+          alert("Set appropriate min-max times!");
+          return;
+        }
+
+        let reflexTime = Math.random() * (maxValue - minValue) + minValue;
+        isGameRunning = true;
+        reflex.textContent = "This doesn't do anything right now...";
+        reflex.disabled = true;
+        let reflexTimer = new Date().getTime();
+      }
+    </script>
+  </body>
+</html>

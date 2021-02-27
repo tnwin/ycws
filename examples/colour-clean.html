@@ -1,0 +1,113 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Random Background Colour</title>
+    <style>
+      body {
+        overflow: hidden;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .colour {
+        background: rgba(146, 170, 184, 0.6);
+        border: 4px solid black;
+        border-radius: 10px;
+        padding: 40px;
+        width: 400px;
+        text-align: center;
+      }
+
+      .buttons {
+        border: 1px dashed black;
+        border-radius: 10px;
+      }
+
+      .btn {
+        margin: 16px;
+      }
+
+      .btn:hover {
+        transition: 0.3s ease all;
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <a href="../index.html">🔙 Home</a>
+      <a href="./colour.html">Original Version</a>
+    </div>
+    <div class="container">
+      <h2 class="colour">Random Background Colour</h2>
+      <div class="buttons">
+        <button class="my-colours btn btn-primary">My Colours</button>
+        <button class="random btn btn-warning">Random Colour</button>
+      </div>
+    </div>
+
+    <script>
+      let colours = [
+        "hotpink",
+        "black",
+        "rgb(255,255,255)",
+        "rgb(0,0,0)",
+        "rgba(123,213,6,0.5)",
+        "#F15025",
+        "#FF751F",
+        "hsl(323, 100%, 81%)"
+      ];
+
+      let hexDigits = [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ];
+
+      let body = document.querySelector("body");
+      let colourName = document.querySelector(".colour");
+      let myColoursBtn = document.querySelector(".my-colours");
+      let randomColourBtn = document.querySelector(".random");
+
+      myColoursBtn.addEventListener("click", function () {
+        let selectedColour =
+          colours[Math.floor(Math.random() * colours.length)];
+
+        body.style.background = selectedColour;
+        colourName.textContent = selectedColour;
+      });
+
+      randomColourBtn.addEventListener("click", function () {
+        let hexColour = "#";
+        for (let i = 0; i < 6; i++) {
+          hexColour =
+            hexColour + hexDigits[Math.floor(Math.random() * hexDigits.length)];
+        }
+
+        body.style.background = hexColour;
+        colourName.textContent = hexColour;
+      });
+    </script>
+  </body>
+</html>

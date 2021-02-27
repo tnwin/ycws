@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tommy's Page</title>
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        background: rgba(56, 133, 20, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <a href="../index.html">🔙 Home</a>
+    </div>
+    <img
+      src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80"
+      alt="space"
+      width="50%"
+    />
+    <h1>Tommy's Website</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+
+    <h2>Pages</h2>
+    <ul>
+      <li>
+        <a href="./colour.html"
+          ><strong>Workshop 2 App: Random Colour App</strong></a
+        >
+      </li>
+      <li><a href="./reflex.html">Unfinished Counter & Reflex App</a></li>
+    </ul>
+
+    <p>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum
+      consequatur soluta commodi. Nihil fuga eaque est quos, iste nostrum eum
+      nulla dolor? Quae sunt laudantium fuga nihil enim magni laborum cumque et,
+      vel unde, repudiandae perferendis perspiciatis corrupti exercitationem. In
+      nisi repellendus odio ratione adipisci labore placeat illo, magni totam
+      consequatur sequi, possimus maiores nobis similique dolore quam blanditiis
+      nemo nihil delectus perferendis dolores numquam nulla voluptas obcaecati.
+      Sunt illum nesciunt cupiditate cum eveniet, corporis rem doloremque iure
+      architecto culpa neque atque quis laudantium repudiandae distinctio
+      molestiae adipisci expedita dicta? Ipsum vitae beatae fugiat similique
+      harum ullam aliquid voluptate repellat?
+    </p>
+
+    <button onclick="alert('Nevermind.')">Call me maybe</button>
+
+    <a target="_blank" href="https://stackoverflow.com">Stack Overflow</a>
+    <a target="_blank" href="https://developer.mozilla.org/en-US/"
+      >MDN Web Docs</a
+    >
+
+    <br />
+
+    <button onclick="hello()">Say Hello!</button>
+
+    <p>Copyright Tommy &#0169; 2020</p>
+    <p class="footer">Copyright Tommy &copy;</p>
+
+    <script>
+      let footer = document.querySelector(".footer");
+      let currentYear = new Date().getFullYear();
+      footer.textContent = footer.textContent + " " + currentYear;
+
+      // Custom function called hello
+      function hello() {
+        let name = prompt("What's your name?");
+        alert("Hello" + " " + name + "!");
+      }
+    </script>
+  </body>
+</html>
